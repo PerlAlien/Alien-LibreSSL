@@ -17,5 +17,12 @@ perl:
   - "5.24"
   - "5.26"
 
+env:
+  global:
+    - ALIEN_BASE_NO_ABMB=1
+  matrix:
+    - ALIEN_FORCE=0
+    - ALIEN_FORCE=1
+
 script:
   - dzil test -v

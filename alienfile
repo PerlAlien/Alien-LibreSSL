@@ -1,10 +1,12 @@
 use alienfile;
-plugin 'PkgConfig' => 'libfoo';
+
+plugin 'PkgConfig' => 'openssl';
+
 share {
+  start_url 'https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/';
   plugin Download => (
-    url => 'http://...',
-    filter => qr/*\.tar\.gz$/,
-    version => qr/([0-9\.]+)/,
+    version       => qr/^libressl-([0-9\.]+)\.tar\.gz$/,
+    bootstrap_ssl => 1,
   );
   plugin Extract => 'tar.gz';
   plugin 'Build::Autoconf';
