@@ -4,7 +4,10 @@ dist: trusty
 
 install:
   - perlbrew list
-  - cpanm -n Dist::Zilla
+  - ./maint/travis-install-mods
+  - af missing --precompile | cpanm -n
+  - af missing --plugin     | cpanm -n
+  - af missing              | cpanm -n
   - dzil authordeps --missing | cpanm -n
   - dzil listdeps   --missing | cpanm -n
 

@@ -27,6 +27,6 @@ const char *
 version(klass)
     const char *klass;
   CODE:
-    RETVAL = OpenSSL_version(OPENSSL_VERSION);
+    RETVAL = SSLeay_version(SSLEAY_VERSION);
   OUTPUT:
     RETVAL
