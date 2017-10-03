@@ -57,6 +57,24 @@ more.  Once you get [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) you are 
 some combination of this module and [Alien::OpenSSL](https://metacpan.org/pod/Alien::OpenSSL) will one day make it easier
 to install [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay).
 
+# CAVEATS
+
+Normally [Alien::Build](https://metacpan.org/pod/Alien::Build) + [alienfile](https://metacpan.org/pod/alienfile) use [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) (via [HTTP::Tiny](https://metacpan.org/pod/HTTP::Tiny) or
+[LWP::UserAgent](https://metacpan.org/pod/LWP::UserAgent)) in order to download `https` URLs from the internet, but for
+this to be a dependency of [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) that will obviously not work.  Instead
+this alien attempts to bootstrap SSL by downloading via `wget` or `curl`, if
+they are available.  By default, if they are not available then this Alien will
+attempt to download via `http`.  This obviously might not be desirable for some
+so you can set `ALIEN_OPENSSL_FTP` to `0` if you want to ensure the trasfer
+happens over `https` (and will die, if it isn't available).
+
+# ENVIRONMENT
+
+- ALIEN\_OPENSSL\_FTP
+
+    Set to `1` to allow downloads via `ftp` or `http` (the default).
+    Set to `0` to disallow insecure downloads over `ftp` or `http`.
+
 # SEE ALSO
 
 - [Alien](https://metacpan.org/pod/Alien)

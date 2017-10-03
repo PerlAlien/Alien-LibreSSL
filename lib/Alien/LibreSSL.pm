@@ -63,6 +63,28 @@ L<Net::SSLeay> to install can be problematic on some platforms.  My hope is that
 some combination of this module and L<Alien::OpenSSL> will one day make it easier
 to install L<Net::SSLeay>.
 
+=head1 CAVEATS
+
+Normally L<Alien::Build> + L<alienfile> use L<Net::SSLeay> (via L<HTTP::Tiny> or
+L<LWP::UserAgent>) in order to download C<https> URLs from the internet, but for
+this to be a dependency of L<Net::SSLeay> that will obviously not work.  Instead
+this alien attempts to bootstrap SSL by downloading via C<wget> or C<curl>, if
+they are available.  By default, if they are not available then this Alien will
+attempt to download via C<http>.  This obviously might not be desirable for some
+so you can set C<ALIEN_OPENSSL_FTP> to C<0> if you want to ensure the trasfer
+happens over C<https> (and will die, if it isn't available).
+
+=head1 ENVIRONMENT
+
+=over 4
+
+=item ALIEN_OPENSSL_FTP
+
+Set to C<1> to allow downloads via C<ftp> or C<http> (the default).
+Set to C<0> to disallow insecure downloads over C<ftp> or C<http>.
+
+=back
+
 =head1 SEE ALSO
 
 =over 4

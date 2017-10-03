@@ -3,11 +3,32 @@ use alienfile;
 plugin 'PkgConfig' => 'openssl';
 
 share {
+
   start_url 'https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/';
   plugin Download => (
     version       => qr/^libressl-([0-9\.]+)\.tar\.gz$/,
     bootstrap_ssl => 1,
   );
+
+  unless(meta->has_hook('fetch'))
+  {
+    my $ftp_ok = $ENV{ALIEN_OPENSSL_FTP};
+    $ftp_ok = 1 unless defined $ftp_ok;
+    if($ftp_ok)
+    {
+      log(" ************************************************* ");
+      log(" *  WARNING downloading LibreSSL via HTTP        * ");
+      log(" ************************************************* ");
+      start_url 'http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/';
+      plugin 'Fetch::HTTPTiny';
+    }
+    else
+    {
+      log("Unable to download LibreSSL via https without OpenSSL!");
+      log("Recommend installing wget or curl to bootstrap Alien::LibreSSL");
+      die "unable to download LibreSSL via https";
+    }
+  }
 
   plugin Extract => 'tar.gz';
 
