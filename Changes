@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Don't trust the system OpenSSL on recent OS X
+    if /usr/include/openssl does not exist.
 
 0.02      2017-10-03 11:24:46 -0400
   - Patch for Microsoft Visual C++
