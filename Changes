@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Patch for Microsoft Visual C++
 
 0.01      2017-10-03 09:20:50 -0400
   - initial version
