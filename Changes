@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.02      2017-10-03 11:24:46 -0400
   - Patch for Microsoft Visual C++
   - Fallback on http if https is not available
 
