@@ -4,10 +4,12 @@ dist: trusty
 
 install:
   - perlbrew list
-  - ./maint/travis-install-mods
-  - af missing --precompile | cpanm -n
-  - af missing --plugin     | cpanm -n
-  - af missing              | cpanm -n
+  - cpanm -n Dist::Zilla
+  - cpanm -n App::af
+  - cpanm -n Alien::Build::Probe::OverrideCI
+  - af missing --precompile   | cpanm -n
+  - af missing --plugin       | cpanm -n
+  - af missing                | cpanm -n
   - dzil authordeps --missing | cpanm -n
   - dzil listdeps   --missing | cpanm -n
 
@@ -22,10 +24,10 @@ perl:
 
 env:
   global:
-    - ALIEN_BASE_NO_ABMB=1
+    - ALIEN_BUILD_PRELOAD=Probe::OverrideCI
   matrix:
-    - ALIEN_INSTALL_TYPE=share
-    - ALIEN_INSTALL_TYPE=system
+    - ALIEN_INSTALL_TYPE_CI=share
+    - ALIEN_INSTALL_TYPE_CI=system
 
 script:
   - dzil test -v
