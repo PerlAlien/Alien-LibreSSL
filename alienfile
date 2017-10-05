@@ -58,16 +58,16 @@ share {
       requires 'Text::Patch';
       requires 'Path::Tiny';
 
-      meta->after_hook(
-        extract => sub {
-          my($build) = @_;
-          my($dir) = map { $_->basename } Path::Tiny->new('.')->children;
-          chdir $dir;
-          $build->system('%{perl} %{.install.patch}/libressl-2.6.2.pl');
-          die 'execute failed' if $?;
-          chdir '..';
-        }
-      );
+      #meta->after_hook(
+      #  extract => sub {
+      #    my($build) = @_;
+      #    my($dir) = map { $_->basename } Path::Tiny->new('.')->children;
+      #    chdir $dir;
+      #    $build->system('%{perl} %{.install.patch}/libressl-2.6.2.pl');
+      #    die 'execute failed' if $?;
+      #    chdir '..';
+      #  }
+      #);
 
       gather sub {
         my($build) = @_;
