@@ -49,7 +49,7 @@ This module provides an implementation of SSL.  It will use the system
 SSL, if it can be found.  If the system does not provide SSL, this alien
 will download and build LibreSSL, a drop in replacement for OpenSSL
 
-## Motiviations
+## Motivation
 
 SSL has lots of pitfalls.  SSL on Perl has all of those pitfalls plus some
 more.  Once you get [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) you are mostly out of the woods.  Getting
@@ -65,7 +65,7 @@ this to be a dependency of [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) t
 this alien attempts to bootstrap SSL by downloading via `wget` or `curl`, if
 they are available.  By default, if they are not available then this Alien will
 attempt to download via `http`.  This obviously might not be desirable for some
-so you can set `ALIEN_OPENSSL_FTP` to `0` if you want to ensure the trasfer
+so you can set `ALIEN_OPENSSL_FTP` to `0` if you want to ensure the transfer
 happens over `https` (and will die, if it isn't available).
 
 # ENVIRONMENT
