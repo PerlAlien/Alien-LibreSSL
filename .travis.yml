@@ -7,11 +7,11 @@ install:
   - cpanm -n Dist::Zilla
   - cpanm -n App::af
   - cpanm -n Alien::Build::Plugin::Probe::OverrideCI
-  - af missing --precompile   | cpanm -n
-  - af missing --plugin       | cpanm -n
-  - af missing                | cpanm -n
-  - dzil authordeps --missing | cpanm -n
-  - dzil listdeps   --missing | cpanm -n
+  - env ALIEN_INSTALL_TYPE=$ALIEN_INSTALL_TYPE_CI af missing --precompile   | cpanm -n
+  - env ALIEN_INSTALL_TYPE=$ALIEN_INSTALL_TYPE_CI af missing --plugin       | cpanm -n
+  - env ALIEN_INSTALL_TYPE=$ALIEN_INSTALL_TYPE_CI af missing                | cpanm -n
+  - env ALIEN_INSTALL_TYPE=$ALIEN_INSTALL_TYPE_CI dzil authordeps --missing | cpanm -n
+  - env ALIEN_INSTALL_TYPE=$ALIEN_INSTALL_TYPE_CI dzil listdeps   --missing | cpanm -n
 
 perl:
   - "5.14"
