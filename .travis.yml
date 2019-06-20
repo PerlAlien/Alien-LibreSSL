@@ -1,8 +1,8 @@
 language: perl
-sudo: false
-dist: trusty
+dist: xenial
 
 install:
+  - sudo apt-get update && sudo apt-get install curl
   - perlbrew list
   - cpanm -n Dist::Zilla
   - cpanm -n App::af
