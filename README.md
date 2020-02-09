@@ -6,42 +6,48 @@ Alien wrapper for LibreSSL (alternative to OpenSSL)
 
 EUMM:
 
-    use ExtUtils::MakeMaker;
-    use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
-    
-    WriteMakefile(
-      ...
-      CONFIGURE => {
-        'Alien::Build::Wrapper' => 0,
-        'Alien::LibreSSL'       => 0,
-      },
-      Alien::Base::Wrapper->mm_args,
-    );
+```perl
+use ExtUtils::MakeMaker;
+use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
+
+WriteMakefile(
+  ...
+  CONFIGURE => {
+    'Alien::Build::Wrapper' => 0,
+    'Alien::LibreSSL'       => 0,
+  },
+  Alien::Base::Wrapper->mm_args,
+);
+```
 
 MB:
 
-    use Module::Build;
-    use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
-    
-    my $build = Module::Build->new(
-      ...
-      configure_requires => {
-        'Alien::Build::Wrapper' => 0,
-        'Alien::LibreSSL'       => 0,
-      },
-      Alien::Base::Wrapper->mb_args,
-      ...
-    );
-    
-    $build->create_build_script;
+```perl
+use Module::Build;
+use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
+
+my $build = Module::Build->new(
+  ...
+  configure_requires => {
+    'Alien::Build::Wrapper' => 0,
+    'Alien::LibreSSL'       => 0,
+  },
+  Alien::Base::Wrapper->mb_args,
+  ...
+);
+
+$build->create_build_script;
+```
 
 Perl script:
 
-    use Alien::LibreSSL;
-    use Env qw( @PATH );
-    
-    unshift @PATH, 'Alien::LibreSSL->bin_dir;
-    system 'openssl ...';
+```perl
+use Alien::LibreSSL;
+use Env qw( @PATH );
+
+unshift @PATH, 'Alien::LibreSSL->bin_dir;
+system 'openssl ...';
+```
 
 # DESCRIPTION
 
