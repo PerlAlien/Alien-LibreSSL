@@ -41,7 +41,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: c:\cx
-          key: ${{ runner.os }}-build-${{ hashFiles('perlversion.txt') }}
+          key: ${{ runner.os }}-build-share-${{ hashFiles('perlversion.txt') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ hashFiles('perlversion.txt') }}
 

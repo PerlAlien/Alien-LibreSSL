@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/perl5
-          key: ${{ runner.os }}-build-${{ hashFiles('perlversion.txt') }}
+          key: ${{ runner.os }}-build-system-${{ hashFiles('perlversion.txt') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ hashFiles('perlversion.txt') }}
 
