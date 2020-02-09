@@ -19,7 +19,11 @@ $modules{$_} = $_ for qw(
   Test::Alien
 );
 
-
+$post_diag = sub {
+use Alien::LibreSSL;
+use Test::Alien::Diag qw( alien_diag );
+alien_diag 'Alien::LibreSSL';
+};
 
 my @modules = sort keys %modules;
 
