@@ -1,4 +1,4 @@
-# Alien::LibreSSL [![Build Status](https://secure.travis-ci.org/plicease/Alien-LibreSSL.png)](http://travis-ci.org/plicease/Alien-LibreSSL)
+# Alien::LibreSSL [![Build Status](https://secure.travis-ci.org/plicease/Alien-LibreSSL.png)](http://travis-ci.org/plicease/Alien-LibreSSL) ![windows](https://github.com/plicease/Alien-LibreSSL/workflows/windows/badge.svg) ![macos](https://github.com/plicease/Alien-LibreSSL/workflows/macos/badge.svg)
 
 Alien wrapper for LibreSSL (alternative to OpenSSL)
 
