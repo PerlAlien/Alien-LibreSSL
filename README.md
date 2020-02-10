@@ -1,4 +1,4 @@
-# Alien::LibreSSL [![Build Status](https://secure.travis-ci.org/plicease/Alien-LibreSSL.png)](http://travis-ci.org/plicease/Alien-LibreSSL)
+# Alien::LibreSSL [![Build Status](https://secure.travis-ci.org/plicease/Alien-LibreSSL.png)](http://travis-ci.org/plicease/Alien-LibreSSL) ![windows-share](https://github.com/plicease/Alien-LibreSSL/workflows/windows-share/badge.svg) ![windows-system](https://github.com/plicease/Alien-LibreSSL/workflows/windows-system/badge.svg) ![macos-system](https://github.com/plicease/Alien-LibreSSL/workflows/macos-system/badge.svg)
 
 Alien wrapper for LibreSSL (alternative to OpenSSL)
 
@@ -6,42 +6,48 @@ Alien wrapper for LibreSSL (alternative to OpenSSL)
 
 EUMM:
 
-    use ExtUtils::MakeMaker;
-    use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
-    
-    WriteMakefile(
-      ...
-      CONFIGURE => {
-        'Alien::Build::Wrapper' => 0,
-        'Alien::LibreSSL'       => 0,
-      },
-      Alien::Base::Wrapper->mm_args,
-    );
+```perl
+use ExtUtils::MakeMaker;
+use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
+
+WriteMakefile(
+  ...
+  CONFIGURE => {
+    'Alien::Build::Wrapper' => 0,
+    'Alien::LibreSSL'       => 0,
+  },
+  Alien::Base::Wrapper->mm_args,
+);
+```
 
 MB:
 
-    use Module::Build;
-    use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
-    
-    my $build = Module::Build->new(
-      ...
-      configure_requires => {
-        'Alien::Build::Wrapper' => 0,
-        'Alien::LibreSSL'       => 0,
-      },
-      Alien::Base::Wrapper->mb_args,
-      ...
-    );
-    
-    $build->create_build_script;
+```perl
+use Module::Build;
+use Alien::Base::Wrapper qw( Alien::LibreSSL !export );
+
+my $build = Module::Build->new(
+  ...
+  configure_requires => {
+    'Alien::Build::Wrapper' => 0,
+    'Alien::LibreSSL'       => 0,
+  },
+  Alien::Base::Wrapper->mb_args,
+  ...
+);
+
+$build->create_build_script;
+```
 
 Perl script:
 
-    use Alien::LibreSSL;
-    use Env qw( @PATH );
-    
-    unshift @PATH, 'Alien::LibreSSL->bin_dir;
-    system 'openssl ...';
+```perl
+use Alien::LibreSSL;
+use Env qw( @PATH );
+
+unshift @PATH, 'Alien::LibreSSL->bin_dir;
+system 'openssl ...';
+```
 
 # DESCRIPTION
 
