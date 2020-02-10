@@ -1,10 +1,5 @@
 use alienfile;
 
-configure {
-  requires 'Alien::Build' => '1.74';
-  requires 'Alien::Build::Plugin::Decode::Mojo';
-};
-
 if($^O eq 'darwin' && ! -d '/usr/include/openssl')
 {
   # The OpenSSL that ships with recent OS X is completely broken
@@ -44,7 +39,6 @@ share {
   plugin Download => (
     version       => qr/^libressl-([0-9\.]+)\.tar\.gz$/,
     bootstrap_ssl => 1,
-    decoder       => 'Decode::Mojo',
   );
 
   unless(meta->has_hook('fetch'))
