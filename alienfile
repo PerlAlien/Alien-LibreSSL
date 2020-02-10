@@ -84,7 +84,7 @@ share {
         my $prefix = $build->runtime_prop->{prefix};
 
         require Path::Tiny;
-	my @libs = grep /^[a-z]+\.lib$/, map { $_->basename } Path::Tiny->new('.')->child('lib')->children;
+        my @libs = grep /^[a-z]+\.lib$/, map { $_->basename } Path::Tiny->new('.')->child('lib')->children;
         
         $build->runtime_prop->{$_} = "-I$prefix/include " for qw( cflags cflags_static );
         $build->runtime_prop->{$_} = "-LIBPATH:$prefix/lib @libs " for qw( libs libs_static );
@@ -107,4 +107,3 @@ share {
     }
   }
 }
-
