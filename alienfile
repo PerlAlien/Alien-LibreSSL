@@ -77,24 +77,13 @@ share {
 
     if(meta->prop->{platform}->{compiler_type} eq 'microsoft')
     {
-      requires 'Text::Patch';
       requires 'Path::Tiny';
-
-      #meta->after_hook(
-      #  extract => sub {
-      #    my($build) = @_;
-      #    my($dir) = map { $_->basename } Path::Tiny->new('.')->children;
-      #    chdir $dir;
-      #    $build->system('%{perl} %{.install.patch}/libressl-2.6.2.pl');
-      #    die 'execute failed' if $?;
-      #    chdir '..';
-      #  }
-      #);
 
       gather sub {
         my($build) = @_;
         my $prefix = $build->runtime_prop->{prefix};
 
+        require Path::Tiny;
 	my @libs = grep /^[a-z]+\.lib$/, map { $_->basename } Path::Tiny->new('.')->child('lib')->children;
         
         $build->runtime_prop->{$_} = "-I$prefix/include " for qw( cflags cflags_static );
@@ -105,6 +94,17 @@ share {
   else
   {
     plugin 'Build::Autoconf';
+
+    if($^O eq 'darwin')
+    {
+      build [
+        '%{configure} --enable-shared --enable-static',
+        '%{make}',
+        '%{make} install',
+      ];
+
+      plugin 'Gather::IsolateDynamic';
+    }
   }
 }
 
