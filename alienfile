@@ -18,6 +18,22 @@ if($^O eq 'darwin' && ! -d '/usr/include/openssl')
     /usr/local/lib/pkgconfig
     /usr/local/share/pkgconfig
   );
+
+  if( -d '/usr/local/Cellar/libressl')
+  {
+    require File::Glob;
+    my($dir) = File::Glob::bsd_glob('/usr/local/Cellar/libressl/*/lib/pkgconfig');
+    $ENV{PKG_CONFIG_LIBDIR} .= ":$dir" if $dir;
+  }
+
+  if( -d '/usr/local/Cellar/openssl')
+  {
+    require File::Glob;
+    my($dir) = File::Glob::bsd_glob('/usr/local/Cellar/openssl/*/lib/pkgconfig');
+    $ENV{PKG_CONFIG_LIBDIR} .= ":$dir" if $dir;
+  }
+
+  log "overidding PKG_CONFIG_LIBDIR on macOS: $ENV{PKG_CONFIG_LIBDIR}";
 }
 
 plugin 'PkgConfig' => 'openssl';
