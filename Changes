@@ -2,6 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Use Home Brew OpenSSL as system SSL if available.
+  - Honor the OPENSSL_PREFIX environment variable, if set.
 
 0.03      2019-06-04 08:42:45 -0700
   - Don't trust the system OpenSSL on recent OS X
