@@ -57,10 +57,10 @@ if($^O eq 'MSWin32' && $Config{myuname} =~ /strawberry-perl 5\.([0-9]+)\./ && $1
 int main()
 {
   const char *version;
-#ifdef SSLEAY_VERSION
-  version = SSLeay_version(SSLEAY_VERSION);
+#ifdef OPENSSL_VERSION
+  version = OpenSSL_version(OPENSSL_VERSION);
 #else
-  version = OpenSSL_version(SSLEAY_VERSION);
+  version = SSLeay_version(SSLEAY_VERSION);
 #endif
   printf("version = |%s|\n", version);
   return 0;
@@ -74,6 +74,14 @@ EOF
     "-L$libdir -lssl -lcrypto",
     "-L$libdir -lcrypto -lssl",
   );
+
+  meta->after_hook(gather_system => sub {
+    my $build = shift;
+    if($build->runtime_prop->{version} =~ /^(open|libre)ssl (\S+)/i)
+    {
+      $build->runtime_prop->{version} = $2;
+    }
+  });
 }
 else
 {
