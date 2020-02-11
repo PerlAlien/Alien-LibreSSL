@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.04      2020-02-10 20:18:35 -0700
   - Use Home Brew OpenSSL as system SSL if available.
   - Honor the OPENSSL_PREFIX environment variable, if set.
   - More accurate probing of system libs on older versions of Strawberry.
