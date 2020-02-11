@@ -65,14 +65,19 @@ to install [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay).
 
 # CAVEATS
 
-Normally [Alien::Build](https://metacpan.org/pod/Alien::Build) + [alienfile](https://metacpan.org/pod/alienfile) use [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) (via [HTTP::Tiny](https://metacpan.org/pod/HTTP::Tiny) or
-[LWP::UserAgent](https://metacpan.org/pod/LWP::UserAgent)) in order to download `https` URLs from the internet, but for
-this to be a dependency of [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay) that will obviously not work.  Instead
-this alien attempts to bootstrap SSL by downloading via `wget` or `curl`, if
-they are available.  By default, if they are not available then this Alien will
-attempt to download via `http`.  This obviously might not be desirable for some
-so you can set `ALIEN_OPENSSL_FTP` to `0` if you want to ensure the transfer
-happens over `https` (and will die, if it isn't available).
+None of this applies to a system install where OpenSSL or LibreSSL is already
+installed.
+
+Retrieving LibreSSL or OpenSSL via the internet when you do not already have an
+SSL implementation introduces a bootstrapping problem.  Newer versions of
+[Alien::Build](https://metacpan.org/pod/Alien::Build) + [alienfile](https://metacpan.org/pod/alienfile) prefer the use of `curl` over [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay)
+because on some platforms it is more reliable.  Further, this Alien will try
+to use `wget`.  `curl` and `wget` will only be used if they support the
+`https` protocol.  If neither `curl`, `wget` are available and [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay)
+isn't _already_ installed, then this Alien will refuse to install because it
+has no safe way of retreiving LibreSSL from the internet.  You can force
+an insecure install via `ftp` or `http` using the `ALIEN_OPENSSL_FTP`
+environment variable below, but that is NOT recommended.
 
 # ENVIRONMENT
 
