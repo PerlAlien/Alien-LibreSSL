@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.05      2020-02-11 05:55:06 -0700
   - More accurate probing of system libs on even older versions of Strawberry.
 
 0.04      2020-02-10 20:18:35 -0700
