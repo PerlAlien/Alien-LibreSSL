@@ -44,7 +44,7 @@ if($^O eq 'darwin' && ! -d '/usr/include/openssl')
   log "overidding PKG_CONFIG_LIBDIR on macOS: $ENV{PKG_CONFIG_LIBDIR}";
 }
 
-if($^O eq 'MSWin32' && $Config{myuname} =~ /strawberry-perl 5\.([0-9]+)\./ && $1 < 20)
+if($^O eq 'MSWin32' && $Config{myuname} =~ /strawberry-?perl 5\.([0-9]+)\./ && $1 < 20)
 {
   my $libdir = Path::Tiny->new($^X)->parent->parent->parent->child('c/lib');
   # older versions of Straberry didn't have a working pkg-config
