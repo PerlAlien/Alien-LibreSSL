@@ -1,5 +1,11 @@
 use alienfile;
+use Config;
 use Env qw( @PKG_CONFIG_PATH @PKG_CONFIG_LIBDIR );
+use Path::Tiny ();
+
+configure {
+  requires 'Path::Tiny'
+};
 
 if(defined $ENV{OPENSSL_PREFIX} && -d "$ENV{OPENSSL_PREFIX}/lib/pkgconfig") {
   unshift @PKG_CONFIG_PATH, "$ENV{OPENSSL_PREFIX}/lib/pkgconfig";
@@ -38,7 +44,41 @@ if($^O eq 'darwin' && ! -d '/usr/include/openssl')
   log "overidding PKG_CONFIG_LIBDIR on macOS: $ENV{PKG_CONFIG_LIBDIR}";
 }
 
-plugin 'PkgConfig' => 'openssl';
+if($^O eq 'MSWin32' && $Config{myuname} =~ /strawberry-perl 5\.([0-9]+)\./ && $1 < 20)
+{
+  my $libdir = Path::Tiny->new($^X)->parent->parent->parent->child('c/lib');
+  # older versions of Straberry didn't have a working pkg-config
+  plugin 'Probe::CBuilder' => (
+    libs    => $_,
+    version => qr/version = \|(.*?)\|/,
+    program => <<'EOF',
+#include <stdio.h>
+#include <openssl/crypto.h>
+int main()
+{
+  const char *version;
+#ifdef SSLEAY_VERSION
+  version = SSLeay_version(SSLEAY_VERSION);
+#else
+  version = OpenSSL_version(SSLEAY_VERSION);
+#endif
+  printf("version = |%s|\n", version);
+  return 0;
+}
+EOF
+  ) for (
+    '-leay32 -lssl32',
+    '-lssl -lcrypto',
+    '-lcrypto -lssl',
+    "-L$libdir -leay32 -lssl32",
+    "-L$libdir -lssl -lcrypto",
+    "-L$libdir -lcrypto -lssl",
+  );
+}
+else
+{
+  plugin 'PkgConfig' => 'openssl';
+}
 
 share {
 
@@ -78,8 +118,6 @@ share {
 
     if(meta->prop->{platform}->{compiler_type} eq 'microsoft')
     {
-      requires 'Path::Tiny';
-
       gather sub {
         my($build) = @_;
         my $prefix = $build->runtime_prop->{prefix};
