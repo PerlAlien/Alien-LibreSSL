@@ -1,4 +1,4 @@
-# Alien::LibreSSL [![Build Status](https://api.cirrus-ci.com/github/Perl5-Alien/Alien-LibreSSL.svg)](https://cirrus-ci.com/github/Perl5-Alien/Alien-LibreSSL) [![Build Status](https://secure.travis-ci.org/Perl5-Alien/Alien-LibreSSL.png)](http://travis-ci.org/Perl5-Alien/Alien-LibreSSL) ![windows-share](https://github.com/Perl5-Alien/Alien-LibreSSL/workflows/windows-share/badge.svg) ![windows-system](https://github.com/Perl5-Alien/Alien-LibreSSL/workflows/windows-system/badge.svg) ![macos-system](https://github.com/Perl5-Alien/Alien-LibreSSL/workflows/macos-system/badge.svg) ![macos-share](https://github.com/Perl5-Alien/Alien-LibreSSL/workflows/macos-share/badge.svg)
+# Alien::LibreSSL [![Build Status](https://api.cirrus-ci.com/github/PerlAlien/Alien-LibreSSL.svg)](https://cirrus-ci.com/github/PerlAlien/Alien-LibreSSL) [![Build Status](https://travis-ci.org/PerlAlien/Alien-LibreSSL.svg)](http://travis-ci.org/PerlAlien/Alien-LibreSSL) ![windows-share](https://github.com/PerlAlien/Alien-LibreSSL/workflows/windows-share/badge.svg) ![windows-system](https://github.com/PerlAlien/Alien-LibreSSL/workflows/windows-system/badge.svg) ![macos-system](https://github.com/PerlAlien/Alien-LibreSSL/workflows/macos-system/badge.svg) ![macos-share](https://github.com/PerlAlien/Alien-LibreSSL/workflows/macos-share/badge.svg)
 
 Alien wrapper for LibreSSL (alternative to OpenSSL)
 
@@ -75,7 +75,7 @@ because on some platforms it is more reliable.  Further, this Alien will try
 to use `wget`.  `curl` and `wget` will only be used if they support the
 `https` protocol.  If neither `curl`, `wget` are available and [Net::SSLeay](https://metacpan.org/pod/Net::SSLeay)
 isn't _already_ installed, then this Alien will refuse to install because it
-has no safe way of retreiving LibreSSL from the internet.  You can force
+has no safe way of retrieving LibreSSL from the internet.  You can force
 an insecure install via `ftp` or `http` using the `ALIEN_OPENSSL_FTP`
 environment variable below, but that is NOT recommended.
 

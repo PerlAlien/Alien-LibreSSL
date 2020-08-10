@@ -75,7 +75,7 @@ because on some platforms it is more reliable.  Further, this Alien will try
 to use C<wget>.  C<curl> and C<wget> will only be used if they support the
 C<https> protocol.  If neither C<curl>, C<wget> are available and L<Net::SSLeay>
 isn't I<already> installed, then this Alien will refuse to install because it
-has no safe way of retreiving LibreSSL from the internet.  You can force
+has no safe way of retrieving LibreSSL from the internet.  You can force
 an insecure install via C<ftp> or C<http> using the C<ALIEN_OPENSSL_FTP>
 environment variable below, but that is NOT recommended.
 
